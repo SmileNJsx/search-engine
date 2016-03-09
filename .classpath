@@ -2,20 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/fluent-hc-4.5.1.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/httpclient-4.5.1.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/httpclient-cache-4.5.1.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/httpclient-win-4.5.1.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/httpcore-4.4.3.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/httpmime-4.5.1.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/jna-platform-4.1.0.jar"/>
-	<classpathentry kind="lib" path="//JIMMY/dev/search-engine/lib/jsoup-1.8.3.jar" sourcepath="lib/jsoup-1.8.3-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/Search-Engine/lib/jsoup-1.8.3-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/fluent-hc-4.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-cache-4.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-win-4.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/httpmime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jsoup-1.8.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
