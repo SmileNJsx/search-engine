@@ -12,11 +12,11 @@ public class HtmlParser {
 	
 	Document doc;
 	
-	HtmlParser(String url) throws IOException{//必须进行构造函数
+	HtmlParser(String url) throws IOException{
 		doc=Jsoup.connect(url).get();
 	}
 	
-	public HashMap<String,String> getParserMedia(){//解析媒体链接
+	public HashMap<String,String> getParserMedia(){
 		HashMap<String,String> mapMedia=new HashMap<>();
 		Elements media=doc.select("[src]");
 		for(Element src:media){
@@ -25,7 +25,7 @@ public class HtmlParser {
 		return mapMedia;
 	}
 	
-	public HashMap<String,String> getParserImports(){//解析插件链接
+	public HashMap<String,String> getParserImports(){
 		HashMap<String,String> mapImports=new HashMap<>();
 		Elements imports=doc.select("link[href]");
 		for(Element link:imports){
@@ -34,7 +34,7 @@ public class HtmlParser {
 		return mapImports;
 	}
 	
-	public HashMap<String,String> getParserKeylinks(){//解析关键字链接
+	public HashMap<String,String> getParserKeylinks(){
 		HashMap<String,String> mapLinks=new HashMap<>();
 		Elements links=doc.select("a[href]");
 		for(Element link:links){
