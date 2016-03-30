@@ -42,11 +42,4 @@ public class RetrivePage {
 			httpClient.close();
 		}
 	}
-	
-	public static void main(String args[]) throws Exception{
-		//TODO	DELETE
-		RetrivePage page=new RetrivePage();
-		page.getContent("http://www.baidu.com");
-	}
-	
 }

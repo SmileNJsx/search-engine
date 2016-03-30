@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="lib/lucene-core-5.5.0.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-analyzers-common-5.5.0.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-queryparser-5.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.38-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
