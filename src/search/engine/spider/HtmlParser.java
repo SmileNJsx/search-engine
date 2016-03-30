@@ -51,8 +51,4 @@ public class HtmlParser {
 			return s;
 		}
 	}
-	
-	//TODO DELETE
-	public static void main(String args[]) throws IOException{
-	}
 }
