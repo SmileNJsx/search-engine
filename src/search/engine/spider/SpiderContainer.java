@@ -1,10 +1,13 @@
 package search.engine.spider;
 
+import java.sql.SQLException;
+
 public class SpiderContainer
 {
-    public static final int MAX_SPIDER_COUNT = 3;
+	//TODO READ FROM CONFIG
+    public static final int MAX_SPIDER_COUNT = 1;
     
-    public void retrivePage()
+    public void retrivePageAndHtmlParser() throws SQLException
     {
     	for(int i=0;i<MAX_SPIDER_COUNT;i++)
     	{

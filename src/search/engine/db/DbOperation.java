@@ -4,41 +4,60 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DbOperation
 {
     private static Connection conn = DbConnector.getconnection();
     
+    //public String insert = "insert into search_engine(title,url,hashcode) values(?,?,?)";
+    //public String select = "select url from search_engine where id=1";
+    //public String delete = "delete from search_engine where id=1";
+    //public String update = "update search_engine set tag=1 where id=1"; 
+    
     public static void insert(String sql) throws SQLException
     {
-       PreparedStatement preparedStatement = conn.prepareStatement(sql);
+       Statement statement = conn.createStatement();
        
-       preparedStatement.setLong(1,0);
-       preparedStatement.setString(2,"http://www.njau.edu.cn");
-       preparedStatement.setInt(3, 0);
-       
-       int num = preparedStatement.executeUpdate();
+       int num = statement.executeUpdate(sql);
        
        System.out.println(num + "rows records have been influence");
        
-       DbConnector.close(preparedStatement, conn);
     }
     
-    public static void update(){}
-    
-    public static void select(String sql) throws SQLException
+    public static void update(String sql) throws SQLException
     {
-        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+    	PreparedStatement preparedStatement = conn.prepareStatement(sql);
+    	
+    	int i = preparedStatement.executeUpdate();
+    	
+    	System.out.println("result :"+ i);
+    	
+    }
+    
+    public static String select(String sql) throws SQLException
+    {
+    	String url=null;
+    	
+        Statement statement = conn.createStatement();
         
-        preparedStatement.setInt(1, 1);
-        
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = statement.executeQuery(sql);
         
         while(resultSet.next())
         {
-            String url = resultSet.getString("url");
+		    url = resultSet.getString("url");
+            
         }
+        return url;
     }
     
-    public static void delete(){}
+    public static void delete(String sql) throws SQLException
+    {
+    	PreparedStatement preparedStatement = conn.prepareStatement(sql);
+    	
+    	int i = preparedStatement.executeUpdate();
+    	
+    	System.out.println("result"+i);
+  
+    }
 }
