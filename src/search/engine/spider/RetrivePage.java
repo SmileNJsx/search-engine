@@ -13,8 +13,6 @@ import org.apache.http.util.EntityUtils;
 
 public class RetrivePage {
 	
-	public static long ID = 0;
-	
 	public static String getContent(String url) throws Exception
 	{
 		CloseableHttpClient httpClient=HttpClients.createDefault();
@@ -51,9 +49,7 @@ public class RetrivePage {
 			return responseBody;
 
 		}finally
-		{
-			ID++;
-			
+		{	
 			httpClient.close();
 		}
 	}

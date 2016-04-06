@@ -4,26 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DbOperation
 {
     private static Connection conn = DbConnector.getconnection();
     
-    //public String insert = "insert into search_engine(id,url,tag,hashcode) values(?,?,?,?)";
+    //public String insert = "insert into search_engine(title,url,hashcode) values(?,?,?)";
     //public String select = "select url from search_engine where id=1";
     //public String delete = "delete from search_engine where id=1";
     //public String update = "update search_engine set tag=1 where id=1"; 
     
     public static void insert(String sql) throws SQLException
     {
-       PreparedStatement preparedStatement = conn.prepareStatement(sql);
+       Statement statement = conn.createStatement();
        
-       preparedStatement.setLong(1,0);
-       preparedStatement.setString(2,"http://www.njau.edu.cn");
-       preparedStatement.setInt(3, 0);
-       preparedStatement.setInt(4,0);
-       
-       int num = preparedStatement.executeUpdate();
+       int num = statement.executeUpdate(sql);
        
        System.out.println(num + "rows records have been influence");
        
@@ -43,11 +39,9 @@ public class DbOperation
     {
     	String url=null;
     	
-        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        Statement statement = conn.createStatement();
         
-        preparedStatement.setInt(1, 1);
-        
-        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = statement.executeQuery(sql);
         
         while(resultSet.next())
         {

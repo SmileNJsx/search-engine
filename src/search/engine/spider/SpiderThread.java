@@ -1,26 +1,48 @@
 package search.engine.spider;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
+import search.engine.db.DbConnector;
+import search.engine.db.DbOperation;
 import search.engine.io.FilesIO;
 
 public class SpiderThread implements Runnable
 {
-
-    public static String url = "http://www.njau.edu.cn";
+	//READ FROM MYSQL
+	
+	public static long ID = 1;
+	
+	public static String title;
+	
+    public static String url;
+    
+    public static int tag;
+    
+    public static int hashcode;
     
     public static String content;
     
+    //TODO READ FROM CONFIG
     public static String filePath = "D:\\search_engine";
     
     public HashMap<String,String> keyLinks; 
     
-   /* SpiderThread(String url)
+    SpiderThread() throws SQLException
     {
-        
-    	SpiderThread.url=url;//TODO 从db获得url
+    	
+    	String sql = "select url from urlQueue where id="+ID;
+    	
+    	Connection conn = DbConnector.getconnection();
+    	Statement statement = conn.createStatement();
+    	
+    	url = DbOperation.select(sql);
+    	
+    	DbConnector.close(statement,conn);
     }
-    */
     
     @Override
     public void run()
@@ -28,17 +50,43 @@ public class SpiderThread implements Runnable
         // TODO Auto-generated method stub
     	try 
     	{
+    		Connection conn =DbConnector.getconnection();
+    		
+    		//WRITE FILES
 			content = RetrivePage.getContent(url);
 			
-			FilesIO.writeFile(filePath+"\\"+RetrivePage.ID+".txt", content);
+			FilesIO.writeFile(filePath+"\\"+ID+".txt", content);
 			
-		} catch (Exception e) 
+			
+			//GET URL AND TITLE
+			HtmlParser htmlParser = new HtmlParser(url);
+			
+			keyLinks = htmlParser.getParserKeylinks();
+			
+			for(Entry<String,String> entry:keyLinks.entrySet())
+			{
+				String title;
+				String url;
+				int hashcode;
+				
+				title = entry.getKey();
+				url = entry.getValue();
+				hashcode = url.hashCode();
+				
+				String sql = "insert ignore into  urlQueue(title,url,hashcode) values("+"'"+title+"'"+","+"'"+url+"'"+","+hashcode+")";
+				
+				DbOperation.insert(sql);
+			}	
+			
+		}catch(Exception e) 
     	{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-        
+    	synchronized(this)
+    	{
+    		ID++;
+    	}
     }
     
 }
