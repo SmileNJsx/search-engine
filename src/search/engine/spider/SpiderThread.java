@@ -76,6 +76,11 @@ public class SpiderThread implements Runnable
 				String sql = "insert ignore into  urlQueue(title,url,hashcode) values("+"'"+title+"'"+","+"'"+url+"'"+","+hashcode+")";
 				
 				DbOperation.insert(sql);
+				
+				SpiderThread spiderThread = new SpiderThread();
+				Thread thread = new Thread(spiderThread);
+				thread.start();
+				
 			}	
 			
 		}catch(Exception e) 
