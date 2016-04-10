@@ -31,17 +31,18 @@ public class SpiderThread implements Runnable
     
     public HashMap<String,String> keyLinks; 
     
-    SpiderThread() throws SQLException
+    SpiderThread(Connection conn) throws SQLException
     {
     	
     	String sql = "select url from urlQueue where id="+ID;
     	
-    	Connection conn = DbConnector.getconnection();
-    	Statement statement = conn.createStatement();
+    	//conn =DbConnector.getconnection();
+    	//Connection conn = DbConnector.getconnection();
+    	//Statement statement = conn.createStatement();
     	
     	url = DbOperation.select(sql);
     	
-    	DbConnector.close(statement,conn);
+    	//DbConnector.close(statement,conn);
     }
     
     @Override
@@ -50,7 +51,7 @@ public class SpiderThread implements Runnable
         // TODO Auto-generated method stub
     	try 
     	{
-    		Connection conn =DbConnector.getconnection();
+    		//Connection conn =DbConnector.getconnection();
     		
     		//WRITE FILES
 			content = RetrivePage.getContent(url);
@@ -77,7 +78,7 @@ public class SpiderThread implements Runnable
 				
 				DbOperation.insert(sql);
 				
-				SpiderThread spiderThread = new SpiderThread();
+				SpiderThread spiderThread = new SpiderThread(SpiderContainer.conn);
 				Thread thread = new Thread(spiderThread);
 				thread.start();
 				

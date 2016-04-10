@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DbConnector
 {
-    private static final String URL = "jdbc:mysql://192.168.56.17/url";
+    private static final String URL = "jdbc:mysql://139.129.5.0/url";
     private static final String USER_NAME = "root";
     private static final String PASS_WORD = "Sx930622";
     private static final String Driver_Name = "com.mysql.jdbc.Driver";

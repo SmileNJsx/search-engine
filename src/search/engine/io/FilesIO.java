@@ -26,8 +26,4 @@ public class FilesIO
 		Files.write(path, contentByte);
 	}
 	
-	//TODO
-	public static void main(String[] args) throws IOException
-	{
-	}
 }
