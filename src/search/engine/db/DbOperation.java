@@ -10,11 +10,6 @@ public class DbOperation
 {
     private static Connection conn = DbConnector.getconnection();
     
-    //public String insert = "insert into search_engine(title,url,hashcode) values(?,?,?)";
-    //public String select = "select url from search_engine where id=1";
-    //public String delete = "delete from search_engine where id=1";
-    //public String update = "update search_engine set tag=1 where id=1"; 
-    
     public static void insert(String sql) throws SQLException
     {
        Statement statement = conn.createStatement();

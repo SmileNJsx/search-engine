@@ -2,11 +2,9 @@ package search.engine.spider;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import search.engine.db.DbConnector;
 import search.engine.db.DbOperation;
 import search.engine.io.FilesIO;
 
@@ -14,7 +12,7 @@ public class SpiderThread implements Runnable
 {
 	//READ FROM MYSQL
 	
-	public static long ID = 1;
+	public static long ID;
 	
 	public static String title;
 	
