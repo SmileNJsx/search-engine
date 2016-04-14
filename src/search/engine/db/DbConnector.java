@@ -5,25 +5,32 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import search.engine.util.Config;
+
 public class DbConnector
 {
-    private static final String URL = "jdbc:mysql://139.129.5.0/url";
-    private static final String USER_NAME = "root";
-    private static final String PASS_WORD = "Sx930622";
-    private static final String Driver_Name = "com.mysql.jdbc.Driver";
+    private static String URL;
+    private static String USER_NAME;
+    private static String PASS_WORD;
+    private static String DRIVER_NAME;
     
-   
+    Config config = Config.getInstance();
     
     @SuppressWarnings("unused")
     private static Statement STATEMENT = null; 
     
     public static Connection getconnection()
-    {
+    {	
+    	URL = Config.URL;
+    	USER_NAME = Config.USER_NAME;
+    	PASS_WORD = Config.PASS_WORD;
+    	DRIVER_NAME = Config.DRIVER_NAME;
+    	
         Connection conn = null;
         
         try
         {
-            Class.forName(Driver_Name);
+            Class.forName(DRIVER_NAME);
             
             conn = DriverManager.getConnection(URL, USER_NAME, PASS_WORD);
             

@@ -12,6 +12,7 @@ CREATE TABLE `t_url` (
 	INDEX `add_time` (`add_time`)
 )
 COLLATE='utf8_general_ci'
+DEFAULT CHARSET=utf8
 ENGINE=InnoDB
 AUTO_INCREMENT=2
 ;
