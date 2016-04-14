@@ -15,14 +15,37 @@ public class Config {
 	private String configPath;
 	
 	//DbUser
-	 public String url;
-	 public String user_name;
-	 public String pass_word;
-	 public String driver_name;
+	public static String URL;
+	public static String USER_NAME;
+	public static String PASS_WORD;
+	public static String DRIVER_NAME;
+	
+	public static Config getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new Config();
+		}
+		
+		return instance;
+	}
 	
 	private Config()
 	{
-		
+		this.initProperties();
+		this.initDbUser();
+	}
+	
+	
+	
+	private String getConfig(String key)
+	{
+		return properties.getProperty(key);
+	}
+	
+	private void errExit(String key)
+	{
+		Log.Exit("Invalid format of key :"+key+"! Please check the Config File!");
 	}
 	
 	private void initProperties()
@@ -54,19 +77,38 @@ public class Config {
 	private void initDbUser()
 	{
 		String key , value;
-	}
-	
-	
-	
-	
-	
-	public static Config getInstance()
-	{
-		if(instance == null)
-		{
-			instance = new Config();
-		}
 		
-		return instance;
+		key = "URL";
+		value = getConfig(key);
+		if(value == null || value.length() == 0)
+		{
+			errExit(key);
+		}
+		URL = value;
+		
+		key = "USER_NAME";
+		value = getConfig(key);
+		if(value == null || value.length() == 0)
+		{
+			errExit(key);
+		}
+		USER_NAME =value;
+		
+		key ="PASS_WORD";
+		value = getConfig(key);
+		if(value == null || value.length() == 0)
+		{
+			errExit(key);
+		}
+		PASS_WORD = value;
+		
+		key = "DRIVER_NAME";
+		value = getConfig(key);
+		if(value == null || value.length() == 0)
+		{
+			errExit(key);
+		}
+		DRIVER_NAME = value;
 	}
+	
 }

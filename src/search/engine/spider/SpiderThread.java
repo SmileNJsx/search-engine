@@ -34,7 +34,7 @@ public class SpiderThread implements Runnable
     SpiderThread(Connection conn) throws SQLException
     {
     	
-    	String sql = "select url from urlQueue where id="+ID;
+    	String sql = "select url from t_url where id="+ID;
     	
     	//conn =DbConnector.getconnection();
     	//Connection conn = DbConnector.getconnection();
@@ -74,7 +74,9 @@ public class SpiderThread implements Runnable
 				url = entry.getValue();
 				hashcode = url.hashCode();
 				
-				String sql = "insert ignore into  urlQueue(title,url,hashcode) values("+"'"+title+"'"+","+"'"+url+"'"+","+hashcode+")";
+				System.out.println(title);
+				
+				String sql = "insert ignore into  t_url(title,url,hashcode) values("+"'"+title+"'"+","+"'"+url+"'"+","+hashcode+")";
 				
 				DbOperation.insert(sql);
 				
