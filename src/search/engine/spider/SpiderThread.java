@@ -1,7 +1,5 @@
 package search.engine.spider;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -12,7 +10,7 @@ public class SpiderThread implements Runnable
 {
 	//READ FROM MYSQL
 	
-	public static long ID;
+	public static long ID=1;
 	
 	public static String title;
 	
@@ -29,27 +27,16 @@ public class SpiderThread implements Runnable
     
     public HashMap<String,String> keyLinks; 
     
-    SpiderThread(Connection conn) throws SQLException
-    {
-    	
-    	String sql = "select url from t_url where id="+ID;
-    	
-    	//conn =DbConnector.getconnection();
-    	//Connection conn = DbConnector.getconnection();
-    	//Statement statement = conn.createStatement();
-    	
-    	url = DbOperation.select(sql);
-    	
-    	//DbConnector.close(statement,conn);
-    }
-    
     @Override
     public void run()
     {
         // TODO Auto-generated method stub
     	try 
     	{
-    		//Connection conn =DbConnector.getconnection();
+    		
+    		String selectSql_1 = "select url from t_url where id="+ID;
+        	
+        	url = DbOperation.select(selectSql_1);
     		
     		//WRITE FILES
 			content = RetrivePage.getContent(url);
@@ -72,16 +59,14 @@ public class SpiderThread implements Runnable
 				url = entry.getValue();
 				hashcode = url.hashCode();
 				
-				System.out.println(title);
+				String selectSql_2 = "select url from t_url where hashcode="+hashcode;
 				
-				String sql = "insert ignore into  t_url(title,url,hashcode) values("+"'"+title+"'"+","+"'"+url+"'"+","+hashcode+")";
-				
-				DbOperation.insert(sql);
-				
-				SpiderThread spiderThread = new SpiderThread(SpiderContainer.conn);
-				Thread thread = new Thread(spiderThread);
-				thread.start();
-				
+				if(DbOperation.select(selectSql_2)==null)
+				{
+					String insertSql = "insert ignore into  t_url(title,url,hashcode) values("+"'"+title+"'"+","+"'"+url+"'"+","+hashcode+")";
+					
+					DbOperation.insert(insertSql);	
+				}
 			}	
 			
 		}catch(Exception e) 
