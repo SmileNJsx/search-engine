@@ -2,15 +2,15 @@ package search.engine.util;
 
 public class Url
 {
-    private long id;
+    public static long id=1;
     
-    private String title;
+    public String title;
     
-    private String url;
+    public String url;
     
-    private int tag;
+    public int tag;
 
-    private int hashcode;
+    public int hashcode;
     
     public long getId()
     {
@@ -37,10 +37,10 @@ public class Url
     	return hashcode;
     }
     
-    public void setId(long id)
+   /* public void setId(long id)
     {
         this.id = id;
-    }
+    } */
     
     public void setTitle(String title)
     {

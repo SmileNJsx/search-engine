@@ -5,12 +5,11 @@ import java.util.Map.Entry;
 
 import search.engine.db.DbOperation;
 import search.engine.io.FilesIO;
+import search.engine.util.Url;
 
 public class SpiderThread implements Runnable
 {
 	//READ FROM MYSQL
-	
-	public static long ID=1;
 	
 	public static String title;
 	
@@ -34,14 +33,14 @@ public class SpiderThread implements Runnable
     	try 
     	{
     		
-    		String selectSql_1 = "select url from t_url where id="+ID;
+    		String selectSql_1 = "select url from t_url where id="+Url.id;
         	
         	url = DbOperation.select(selectSql_1);
     		
     		//WRITE FILES
 			content = RetrivePage.getContent(url);
 			
-			FilesIO.writeFile(filePath+"\\"+ID+".txt", content);
+			FilesIO.writeFile(filePath+"\\"+Url.id+".txt", content);
 			
 			
 			//GET URL AND TITLE
@@ -67,17 +66,18 @@ public class SpiderThread implements Runnable
 					
 					DbOperation.insert(insertSql);	
 				}
-			}	
+			}
+			
+			String updateSql = "update t_url set tag=1 where id="+Url.id;
+			
+			DbOperation.update(updateSql);
 			
 		}catch(Exception e) 
     	{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	synchronized(this)
-    	{
-    		ID++;
-    	}
+    		Url.id++;
     }
     
 }

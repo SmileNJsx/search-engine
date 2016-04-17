@@ -2,24 +2,26 @@ package search.engine.spider;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import search.engine.db.DbConnector;
 
 public class SpiderContainer
 {
 	//TODO READ FROM CONFIG
-    public static final int MAX_SPIDER_COUNT = 1;
+    public static final int MAX_SPIDER_COUNT = 16;
     
     public static Connection conn = DbConnector.getconnection();
     
-    public void retrivePageAndHtmlParser() throws SQLException
+    public void retrivePageAndHtmlParser() throws SQLException, InterruptedException
     {
-    	for(int i=0;i<MAX_SPIDER_COUNT;i++)
+    	SpiderThread spiderThread = new SpiderThread();
+    	
+    	while(true)
     	{
-    		
-    		SpiderThread spiderThread = new SpiderThread();
     		Thread thread = new Thread(spiderThread);
-    		thread.start();
+        	
+        	thread.start();
+        	
+        	thread.join();
     	}
     }
 }
