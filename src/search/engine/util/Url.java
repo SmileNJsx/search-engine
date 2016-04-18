@@ -2,7 +2,7 @@ package search.engine.util;
 
 public class Url
 {
-    public static long id=1;
+    public static long id=Config.ID;
     
     public String title;
     
