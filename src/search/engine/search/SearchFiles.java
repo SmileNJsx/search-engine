@@ -13,6 +13,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
@@ -28,9 +29,9 @@ public class SearchFiles
 	public int repeat = 0;
 	public boolean raw = false;
 	public String queryString = null;
-	public int hitPerPage = 10;
+	public int hitsPerPage = 10;
 	
-	public SearchFiles() throws  IOException
+	public SearchFiles() throws  IOException, ParseException
 	{
 		IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(index)));
 		IndexSearcher searcher = new IndexSearcher(reader);
@@ -58,8 +59,38 @@ public class SearchFiles
 			
 			String line = queryString != null ? queryString : in.readLine();
 			
+			if(line.length() == -1 || line == null)
+			{
+				break;
+			}
+			
 			line = line.trim();
+			
+			if(line.length() == 0)
+			{
+				break;
+			}
+			
+			Query query = parser.parse(line);
+			System.out.println("Searching for : "+query.toString(field));
+			
+			if(repeat > 0)
+			{
+				for(int i = 0;i < repeat;i++)
+				{
+					searcher.search(query, 100);
+				}
+			}
+			
+			doPagingSearch(in,searcher,query,hitsPerPage,raw,queries == null&& queryString == null);
+			
+			if(queryString != null)
+			{
+				break;
+			}
 		}
+		
+		reader.close();
 	}
 	
 	public static void doPagingSearch(BufferedReader in,IndexSearcher searcher,Query query,int hitsPerPage,boolean raw,boolean interactive) throws IOException
