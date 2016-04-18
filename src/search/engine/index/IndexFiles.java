@@ -32,15 +32,15 @@ public class IndexFiles
        * [-update]
        * */
     
-    String indexPath = "D:\\search_engine_INDEX_PATH";
+    public String indexPath = "D:\\search_engine_INDEX_PATH";
     
-    String docsPath = "D:\\search_engine";
+    public String docsPath = "D:\\search_engine";
     
-    boolean create = false;
+    public boolean create = false;
     
-    final Path docDir = Paths.get(docsPath);
+    public final Path docDir = Paths.get(docsPath);
     
-    IndexFiles()
+    public IndexFiles()
     {
     	if(!Files.isReadable(docDir))
     	{
