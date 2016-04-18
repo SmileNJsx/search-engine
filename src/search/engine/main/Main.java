@@ -6,7 +6,7 @@ import search.engine.spider.SpiderContainer;
 
 public class Main {
 	//TODO MOD SPIDER & INDEX & SEARCH
-	public static void main(String args[]) throws SQLException{
+	public static void main(String args[]) throws SQLException, InterruptedException{
 		SpiderContainer spiderContainer = new SpiderContainer();
 		spiderContainer.retrivePageAndHtmlParser();
 	}
