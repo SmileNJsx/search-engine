@@ -1,24 +1,27 @@
 package search.engine.main;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.apache.lucene.queryparser.classic.ParseException;
 
-import search.engine.index.IndexFiles;
-import search.engine.search.SearchFiles;
+import search.engine.db.SearchDb;
 
 public class Main {
 	//TODO MOD SPIDER & INDEX & SEARCH
-	@SuppressWarnings("unused")
-	public static void main(String args[]) throws IOException, ParseException
+	
+	public static void main(String args[]) throws IOException, ParseException, SQLException
 	{
 		/*
+		
 		SpiderContainer spiderContainer = new SpiderContainer();
 		spiderContainer.retrivePageAndHtmlParser();
 		*/
 		
-		IndexFiles index = new IndexFiles();
-		SearchFiles search = new SearchFiles();
+		/*IndexFiles index = new IndexFiles(true);
+		SearchFiles search = new SearchFiles();*/
+		
+		SearchDb.search("南京农业大学");
 		
 	}
 }

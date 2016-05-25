@@ -38,8 +38,11 @@ public class IndexFiles {
     String docsPath = "D:\\searchtest";
     boolean create = true;
     
-	  public IndexFiles() 
+	  public IndexFiles(boolean create) 
 	  {
+		  
+		  this.create = create; 
+		  
 		  if (docsPath == null) {
 		      System.err.println("Usage: " + usage);
 		      System.exit(1);

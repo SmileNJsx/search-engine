@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import search.engine.db.DbOperation;
+import search.engine.index.IndexFiles;
 import search.engine.io.FilesIO;
 import search.engine.util.Url;
 
@@ -25,7 +26,7 @@ public class SpiderThread implements Runnable
     public static String filePath = "D:\\search_engine";
     
     public HashMap<String,String> keyLinks; 
-    
+   
     @Override
     public void run()
     {
@@ -41,6 +42,9 @@ public class SpiderThread implements Runnable
 			content = RetrivePage.getContent(url);
 			
 			FilesIO.writeFile(filePath+"\\"+Url.id+".txt", content);
+			
+			@SuppressWarnings("unused")
+			IndexFiles indexFiles = new IndexFiles(false);
 			
 			
 			//GET URL AND TITLE
